@@ -1,0 +1,41 @@
+// https://github.com/tebelorg/TagUI
+// to run this script on windows 10 command prompt
+// open command prompt
+// goto \tagui\src\sample\gs
+// run >> tagui gs_skws
+
+// objective: 
+//  step 1: go to eGSOL desktop HP
+//  step 2: enter pre-determined search phrase into search box
+//  step 3: search by default, ie 'Products', & take a snapshot evidence
+//  step 4: run search
+//  step 5: go to (supplier) search results page, take a snapshot evidence
+
+https://www.globalsources.com/
+echo '1) current url is ' url()
+echo '2) fill-in sKWS'
+click gsolquery
+enter gsolquery as yiwu hongmi
+click qTypeSelTrigger
+click //a[text()="Suppliers"]
+snap page to homepage.png
+
+echo '3) clicking search button'
+click keywordBtnSearch
+
+echo '4) wait 2s'
+wait 2
+
+echo '5) close eGuide if shown'
+check present('closeEguide') | 'eGuide shown' | 'no eGuide'
+if present('closeEguide')
+{ 
+	click closeEguide 
+}
+
+echo '6) snap sKWS results page'
+snap page to sKWS_results.png
+
+echo '7) sKWS completed'
+//ask 'ready'
+//live
